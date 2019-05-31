@@ -10,16 +10,16 @@ namespace CongestionCharger.App
         private const decimal CarRatePM = 2.5m;
 
         private const decimal BikePerMinute = BikeRate / 60;
-        private const decimal VehiclePerMinuteAM = CarRateAM / 60;
-        private const decimal VehiclePerMinutePM = CarRatePM / 60;
+        private const decimal CarPerMinuteAM = CarRateAM / 60;
+        private const decimal CarPerMinutePM = CarRatePM / 60;
 
         private readonly VehicleType _vehicle;
 
         public TimeSpan SpanAM { get; set; }
         public TimeSpan SpanPM { get; set; }
 
-        public decimal ChargeAM => RoundDown((int) SpanAM.TotalMinutes * RateAm());
-        public decimal ChargePM => RoundDown((int) SpanPM.TotalMinutes * RatePm());
+        public decimal ChargeAM => RoundDown((int) SpanAM.TotalMinutes * GetRateAM());
+        public decimal ChargePM => RoundDown((int) SpanPM.TotalMinutes * GetRatePM());
         public decimal ChargeTotal => ChargeAM + ChargePM;
 
         public Charge(VehicleType vehicle)
@@ -37,13 +37,13 @@ Charge for {(int) SpanPM.TotalHours}h {SpanPM.Minutes}m (PM rate): {ChargePM:C2}
 Total Charge: {ChargeTotal:C2}");
         }
 
-        private decimal RateAm()
+        private decimal GetRateAM()
         {
             switch (_vehicle)
             {
                 case VehicleType.Car:
                 case VehicleType.Van:
-                    return VehiclePerMinuteAM;
+                    return CarPerMinuteAM;
                 case VehicleType.Motobike:
                     return BikePerMinute;
                 default:
@@ -51,13 +51,13 @@ Total Charge: {ChargeTotal:C2}");
             }
         }
 
-        private decimal RatePm()
+        private decimal GetRatePM()
         {
             switch (_vehicle)
             {
                 case VehicleType.Car:
                 case VehicleType.Van:
-                    return VehiclePerMinutePM;
+                    return CarPerMinutePM;
                 case VehicleType.Motobike:
                     return BikePerMinute;
                 default:
