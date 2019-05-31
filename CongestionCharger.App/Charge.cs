@@ -5,12 +5,15 @@ namespace CongestionCharger.App
 {
     public class Charge
     {
+        private const decimal BikeRate = 1m;
+        private const decimal CarRateAM = 2m;
+        private const decimal CarRatePM = 2.5m;
+
+        private const decimal BikePerMinute = BikeRate / 60;
+        private const decimal VehiclePerMinuteAM = CarRateAM / 60;
+        private const decimal VehiclePerMinutePM = CarRatePM / 60;
+
         private readonly VehicleType _vehicle;
-
-        private const decimal BikePerMinute = 1m / 60;
-        private const decimal VehiclePerMinuteAM = 2m / 60;
-        private const decimal VehiclePerMinutePM = 2.5m / 60;
-
 
         public TimeSpan SpanAM { get; set; }
         public TimeSpan SpanPM { get; set; }
