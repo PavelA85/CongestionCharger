@@ -12,7 +12,7 @@ namespace CongestionCharger.App
             var items = new[]
             {
                 (VehicleType.Car, "24/04/2008 11:32", "24/04/2008 14:42"),
-                (Motobike: VehicleType.Motobike, "24/04/2008 17:00", "24/04/2008 22:11"),
+                (VehicleType.Motobike, "24/04/2008 17:00", "24/04/2008 22:11"),
                 (VehicleType.Van, "25/04/2008 10:23", "28/04/2008 09:02"),
             };
 

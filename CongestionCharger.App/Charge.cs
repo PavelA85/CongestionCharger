@@ -16,7 +16,7 @@ namespace CongestionCharger.App
 
         public Charge(VehicleType type)
         {
-            _rate = Helpers.GetRate(type);
+            _rate = type.GetRate();
         }
 
         public override string ToString()
