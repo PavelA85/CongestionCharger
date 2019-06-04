@@ -59,11 +59,11 @@ Total Charge: £2.00");
                 SpanAM = TimeSpan.FromMinutes(3 * 60 + 39),
                 SpanPM = TimeSpan.FromMinutes(7 * 60)
             });
-            r3.ToString().Should().BeEquivalentTo(@"Charge for 3h 39m (AM rate): £7.20
+            r3.ToString().Should().BeEquivalentTo(@"Charge for 3h 39m (AM rate): £7.30
 
 Charge for 7h 0m (PM rate): £17.50
 
-Total Charge: £24.70");
+Total Charge: £24.80");
         }
     }
 }

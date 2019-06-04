@@ -9,17 +9,13 @@ namespace CongestionCharger.App
         private const decimal CarRateAM = 2m;
         private const decimal CarRatePM = 2.5m;
 
-        private const decimal BikePerMinute = BikeRate / 60;
-        private const decimal CarPerMinuteAM = CarRateAM / 60;
-        private const decimal CarPerMinutePM = CarRatePM / 60;
-
         private readonly VehicleType _vehicle;
 
         public TimeSpan SpanAM { get; set; }
         public TimeSpan SpanPM { get; set; }
 
-        public decimal ChargeAM => RoundDown((int) SpanAM.TotalMinutes * GetRateAM());
-        public decimal ChargePM => RoundDown((int) SpanPM.TotalMinutes * GetRatePM());
+        public decimal ChargeAM => RoundDown((decimal)SpanAM.TotalHours * GetRateAM());
+        public decimal ChargePM => RoundDown((decimal)SpanPM.TotalHours * GetRatePM());
         public decimal ChargeTotal => ChargeAM + ChargePM;
 
         public Charge(VehicleType vehicle)
@@ -30,9 +26,9 @@ namespace CongestionCharger.App
         public override string ToString()
         {
             return WithCulture(CultureInfo.GetCultureInfo("en-GB"),
-                $@"Charge for {(int) SpanAM.TotalHours}h {SpanAM.Minutes}m (AM rate): {ChargeAM:C2}
+                $@"Charge for {(int)SpanAM.TotalHours}h {SpanAM.Minutes}m (AM rate): {ChargeAM:C2}
 
-Charge for {(int) SpanPM.TotalHours}h {SpanPM.Minutes}m (PM rate): {ChargePM:C2}
+Charge for {(int)SpanPM.TotalHours}h {SpanPM.Minutes}m (PM rate): {ChargePM:C2}
 
 Total Charge: {ChargeTotal:C2}");
         }
@@ -43,9 +39,9 @@ Total Charge: {ChargeTotal:C2}");
             {
                 case VehicleType.Car:
                 case VehicleType.Van:
-                    return CarPerMinuteAM;
+                    return CarRateAM;
                 case VehicleType.Motobike:
-                    return BikePerMinute;
+                    return BikeRate;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -57,9 +53,9 @@ Total Charge: {ChargeTotal:C2}");
             {
                 case VehicleType.Car:
                 case VehicleType.Van:
-                    return CarPerMinutePM;
+                    return CarRatePM;
                 case VehicleType.Motobike:
-                    return BikePerMinute;
+                    return BikeRate;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
