@@ -40,8 +40,10 @@ Total Charge: {ChargeTotal:C2}");
                 case VehicleType.Car:
                 case VehicleType.Van:
                     return CarRateAM;
+
                 case VehicleType.Motobike:
                     return BikeRate;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -54,8 +56,10 @@ Total Charge: {ChargeTotal:C2}");
                 case VehicleType.Car:
                 case VehicleType.Van:
                     return CarRatePM;
+
                 case VehicleType.Motobike:
                     return BikeRate;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -65,7 +69,6 @@ Total Charge: {ChargeTotal:C2}");
         {
             return Math.Floor(d * 10) / 10;
         }
-
 
         private static string WithCulture(IFormatProvider cultureInfo, FormattableString formattableString)
         {
