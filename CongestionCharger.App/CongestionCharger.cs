@@ -5,18 +5,18 @@ namespace CongestionCharger.App
 {
     public class CongestionCharger
     {
-        public Charge Charge(VehicleType vehicle, string from, string to)
+        public Charge Charge(VehicleType type, string from, string to)
         {
-            return Charge(vehicle, DateTime.Parse(from), DateTime.Parse(to));
+            return Charge(type, DateTime.Parse(from), DateTime.Parse(to));
         }
 
-        public Charge Charge(VehicleType vehicle, DateTime from, DateTime to)
+        public Charge Charge(VehicleType type, DateTime from, DateTime to)
         {
             var span = to - from;
-            var finalCharge = Enumerable.Range(0, (int) span.TotalMinutes)
+            var finalCharge = Enumerable.Range(0, (int)span.TotalMinutes)
                 .Select(x => from.AddMinutes(x))
                 .Select(x => (x.Hour, x.DayOfWeek))
-                .Aggregate(new Charge(vehicle), (charge, minute) => Calc(minute, charge));
+                .Aggregate(new Charge(type), (charge, minute) => Calc(minute, charge));
 
             return finalCharge;
         }

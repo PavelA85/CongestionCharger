@@ -4,6 +4,7 @@
     {
         Car,
         Van,
-        Motobike
+        Motobike,
+        Bus
     }
 }

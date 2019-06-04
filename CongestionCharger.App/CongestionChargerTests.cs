@@ -65,5 +65,23 @@ Charge for 7h 0m (PM rate): £17.50
 
 Total Charge: £24.80");
         }
+        [Fact]
+        public void Test_bus()
+        {
+            var sut = new CongestionCharger();
+
+            var r3 = sut.Charge(VehicleType.Bus, "25/04/2008 10:23", "28/04/2008 09:02");
+
+            r3.Should().BeEquivalentTo(new Charge(VehicleType.Bus)
+            {
+                SpanAM = TimeSpan.FromMinutes(3 * 60 + 39),
+                SpanPM = TimeSpan.FromMinutes(7 * 60)
+            });
+            r3.ToString().Should().BeEquivalentTo(@"Charge for 3h 39m (AM rate): £14.60
+
+Charge for 7h 0m (PM rate): £35.00
+
+Total Charge: £49.60");
+        }
     }
 }
